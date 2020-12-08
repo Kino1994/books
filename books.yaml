@@ -1,0 +1,192 @@
+---
+openapi: 3.0.0
+info:
+  title: Books
+  description: Books Management API
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/Kino1994/Books/1.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /books:
+    get:
+      tags:
+      - Books
+      description: Get all Books
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+        "500":
+          description: Internal server error
+    post:
+      tags:
+      - Books
+      description: Create a Book
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookPost'
+        required: true
+      responses:
+        "201":
+          description: The book was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookInfo'
+        "400":
+          description: Bad request
+        "500":
+          description: Internal server error
+  /books/{id}:
+    get:
+      tags:
+      - Books
+      description: Get Book by id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookInfo'
+        "404":
+          description: The specified book was not found.
+  /books/{id}/comment:
+    put:
+      tags:
+      - Books
+      description: Add a comment to a book
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+        required: true
+      responses:
+        "201":
+          description: The comment was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookInfo'
+        "404":
+          description: The specified book was not found.
+        "500":
+          description: Internal server error
+  /books/{id}/comment/{comment_id}:
+    delete:
+      tags:
+      - Books
+      description: Delete a comment from a book
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: comment_id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: The comment was deleted successfully.
+        "404":
+          description: One of the specified resource was not found.
+        "500":
+          description: Internal server error
+components:
+  schemas:
+    Book:
+      required:
+      - id
+      - tittle
+      type: object
+      properties:
+        id:
+          type: integer
+        tittle:
+          type: string
+    BookPost:
+      required:
+      - author
+      - editorial
+      - publication_year
+      - summary
+      - tittle
+      type: object
+      properties:
+        tittle:
+          type: string
+        summary:
+          type: string
+        author:
+          type: string
+        editorial:
+          type: string
+        publication_year:
+          type: integer
+    BookInfo:
+      required:
+      - id
+      - tittle
+      type: object
+      properties:
+        id:
+          type: integer
+        tittle:
+          type: string
+        summary:
+          type: string
+        author:
+          type: string
+        editorial:
+          type: string
+        publication_year:
+          type: integer
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+    Comment:
+      required:
+      - id
+      - message
+      type: object
+      properties:
+        id:
+          type: integer
+        message:
+          type: string
