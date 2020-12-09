@@ -20,7 +20,6 @@ public class BookService {
 	private ConcurrentMap<Long, Book> books = new ConcurrentHashMap<>();
 	private AtomicLong nextBookId = new AtomicLong();
 	private AtomicLong nextCommentId = new AtomicLong();
-
 		
 	public BookService() {
 		this.save(new BookPost("Atlas shrugged", "summary 1", "Ayn Rand", "Deusto", 2019));
@@ -82,9 +81,5 @@ public class BookService {
 		}
 		return null;
 	}
-	
-	
-	
-	
 
 }

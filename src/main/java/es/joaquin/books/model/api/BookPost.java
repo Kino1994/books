@@ -16,7 +16,7 @@ public class BookPost {
 	@JsonProperty("editorial")
 	private String editorial;
 
-	@JsonProperty("publication_year")
+	@JsonProperty("publicationYear")
 	private Integer publicationYear;
 		
 	public BookPost(String tittle, String summary, String author, String editorial, Integer publicationYear) {

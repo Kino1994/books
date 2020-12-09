@@ -41,7 +41,7 @@ public interface Basico { }
 	private String editorial;
 
 	@JsonView(Info.class)
-	@JsonProperty("publication_year")
+	@JsonProperty("publicationYear")
 	private Integer publicationYear;
 
 	@JsonView(Extra.class)

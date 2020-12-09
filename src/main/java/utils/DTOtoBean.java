@@ -24,5 +24,5 @@ public class DTOtoBean {
 		comment.setScore(CommentPost.getScore());
 		return comment;
 	}
-
+	
 }
