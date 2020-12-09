@@ -15,7 +15,7 @@
   * [POST BOOK 201](#6-post-book-201)
   * [PUT COMMENT 200](#7-put-comment-200)
   * [PUT COMMENT IN A NO EXISTING BOOK 404](#8-put-comment-in-a-no-existing-book-404)
-  * [PUT COMMENT WITH WRONG SCORE  400](#9-put-comment-with-wrong-score--400)
+  * [PUT COMMENT WITH WRONG SCORE  400](#9-put-comment-with-wrong-score-400)
 
 
 --------
@@ -177,7 +177,7 @@ URL: http://localhost:8080/books/22/comment
 
 
 
-### 9. PUT COMMENT WITH WRONG SCORE  400
+### 9. PUT COMMENT WITH WRONG SCORE 400
 
 
 

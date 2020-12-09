@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d59ac48d-950b-4006-8d94-cc3edf074491",
+		"_postman_id": "fc226fa7-d498-44b8-ba81-afd761ea653f",
 		"name": "API REST",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -125,7 +125,7 @@
 			"response": []
 		},
 		{
-			"name": "PUT COMMENT WITH WRONG SCORE  400",
+			"name": "PUT COMMENT WITH WRONG SCORE 400",
 			"request": {
 				"method": "PUT",
 				"header": [],
