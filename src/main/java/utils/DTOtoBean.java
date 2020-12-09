@@ -19,8 +19,8 @@ public class DTOtoBean {
 	
 	public static Comment toComment(CommentPost CommentPost) {
 		Comment comment = new Comment();
+		comment.setName(CommentPost.getName());
 		comment.setMessage(CommentPost.getMessage());
-		comment.setName(CommentPost.getMessage());
 		comment.setScore(CommentPost.getScore());
 		return comment;
 	}

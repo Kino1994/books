@@ -5,16 +5,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Comment {
 
 	@JsonProperty("id")
-	private Integer id = null;
+	private Integer id;
 
 	@JsonProperty("name")
-	private String name = null;
+	private String name;
 
 	@JsonProperty("message")
-	private String message = null;
+	private String message;
 
 	@JsonProperty("score")
-	private Integer score = null;
+	private Integer score;
 
 	public Integer getId() {
 		return id;

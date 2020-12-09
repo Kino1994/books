@@ -3,9 +3,7 @@ package es.joaquin.books.model.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BookPost {
-public interface Basico { }
 	
-
 	@JsonProperty("tittle")
 	private String tittle;
 

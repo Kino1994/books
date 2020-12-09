@@ -34,6 +34,7 @@ public class BookService {
 		this.save(new BookPost("Los años de Aznar", "summary 9", "Sergio Gomez Alba", "Cordoba", 2020));
 		this.save(new BookPost("Los ricos de Franco", "summary 10", "Mariano Sanchez Soler", "Roca", 2020));
 		this.save(new BookPost("Blockchain: La revolución industrial de Internet", "summary 11", "Alexander Preukschat", "Ediciones Gestion", 2017));
+		this.put(0L, new CommentPost("Gran libro", "joaquin", 5));
 	}
 
 	public Book save(BookPost bookPost) {

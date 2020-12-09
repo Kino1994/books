@@ -23,6 +23,12 @@ public class CommentPost {
 	@JsonProperty("score")
 	private Integer score;
 
+	public CommentPost(@NotNull String name, @NotNull String message, @NotNull @Min(1) @Max(5) Integer score) {
+		this.name = name;
+		this.message = message;
+		this.score = score;
+	}
+
 	public String getName() {
 		return name;
 	}
