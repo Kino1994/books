@@ -6,6 +6,8 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import es.joaquin.books.model.Comment.CommentDetail;
+
 public class Book {
 	
 	public interface Basico { }
@@ -16,7 +18,7 @@ public class Book {
 	
 	public interface BookDetail extends Basico, Info { }
 	
-	public interface BookDetailWithComments extends Basico, Info, Extra { }
+	public interface BookDetailWithComments extends Basico, Info, Extra, CommentDetail { }
 
 	@JsonView(Basico.class)
 	@JsonProperty("id")
@@ -44,7 +46,11 @@ public class Book {
 
 	@JsonView(Extra.class)
 	@JsonProperty("comments")
-	private List<Comment> comments;
+	private List<Comment> comments;	
+
+	public Book() {
+		this.comments = new ArrayList<Comment>();
+	}
 
 	public Book(String tittle, String summary, String author, String editorial, Integer publicationYear) {
 		this.tittle = tittle;

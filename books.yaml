@@ -88,12 +88,14 @@ paths:
               $ref: '#/components/schemas/CommentPost'
         required: true
       responses:
-        "201":
-          description: The comment was created successfully.
+        "200":
+          description: The comment was added successfully.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookInfo'
+        "400":
+          description: Bad request
         "404":
           description: The specified book was not found.
         "500":

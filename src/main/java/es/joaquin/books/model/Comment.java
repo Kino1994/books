@@ -25,7 +25,11 @@ public class Comment {
 
 	@JsonView(Basico.class)
 	@JsonProperty("score")
-	private Integer score = null;
+	private Integer score = null;	
+
+	public Comment() {
+		
+	}
 
 	public Comment(String name, String message, Integer score) {
 		this.name = name;

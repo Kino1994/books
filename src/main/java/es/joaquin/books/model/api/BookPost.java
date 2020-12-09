@@ -3,20 +3,31 @@ package es.joaquin.books.model.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BookPost {
+public interface Basico { }
+	
+
 	@JsonProperty("tittle")
-	private String tittle = null;
+	private String tittle;
 
 	@JsonProperty("summary")
-	private String summary = null;
+	private String summary;
 
 	@JsonProperty("author")
-	private String author = null;
+	private String author;
 
 	@JsonProperty("editorial")
-	private String editorial = null;
+	private String editorial;
 
 	@JsonProperty("publication_year")
-	private Integer publicationYear = null;
+	private Integer publicationYear;
+		
+	public BookPost(String tittle, String summary, String author, String editorial, Integer publicationYear) {
+		this.tittle = tittle;
+		this.summary = summary;
+		this.author = author;
+		this.editorial = editorial;
+		this.publicationYear = publicationYear;
+	}
 
 	public String getTittle() {
 		return tittle;
