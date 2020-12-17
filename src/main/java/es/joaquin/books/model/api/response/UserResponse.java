@@ -17,19 +17,34 @@ import lombok.NoArgsConstructor;
 public class UserResponse {
 	
 	public interface Basico { }
+	
+	public interface Info { }
+	
+	public interface Extra{ }
+	
+	public interface UserDetail extends Basico, Info { }
+	
+	public interface UserDetailExtra extends Info, Extra { }
+	
+	public interface UserDetailFull extends Basico, Info, Extra { }
 			
 	@JsonView(Basico.class)
 	@JsonProperty("id")
 	private Long id;
 	
-	@JsonView(Basico.class)
+	@JsonView(Info.class)
 	@JsonProperty("nick")
 	private String nick;
 	
 	@Email(message="Please provide a valid email address")
-	@JsonView(Basico.class)
+	@JsonView(Info.class)
 	@JsonProperty("email")
 	private String email;
+	
+	@JsonView(Extra.class)
+	@JsonProperty("idBook")
+	private Long idBook;
+	
 
 
 }

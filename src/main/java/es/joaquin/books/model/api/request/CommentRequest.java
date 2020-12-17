@@ -32,5 +32,9 @@ public class CommentRequest {
 	@JsonView(Info.class)
 	@JsonProperty("score")
 	private Integer score;
+	
+	@JsonView(Info.class)
+	@JsonProperty("nick")
+	private String nick;
 
 }

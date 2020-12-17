@@ -19,7 +19,13 @@ public class CommentResponse {
 
 	public interface Info { }
 	
-	public interface CommentDetail extends Basico, Info { }
+	public interface Extra { }
+	
+	public interface CommentDetail extends Basico, Extra { }
+	
+	public interface CommentInfoDetail extends Basico, Extra, UserResponse.Info { }
+	
+	public interface CommentFullDetail extends Basico, Extra, UserResponse.UserDetailExtra { }
 
 	@JsonView(Info.class)
 	@JsonProperty("id")
@@ -31,6 +37,10 @@ public class CommentResponse {
 
 	@JsonView(Basico.class)
 	@JsonProperty("score")
-	private Integer score;	
+	private Integer score;
+	
+	@JsonView(Extra.class)
+	@JsonProperty("user")
+	private UserResponse user;
 
 }

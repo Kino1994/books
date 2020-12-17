@@ -16,5 +16,7 @@ public class UserDTO {
 	private String nick;
 	
 	private String email;
+	
+	private Long idBook;
 
 }

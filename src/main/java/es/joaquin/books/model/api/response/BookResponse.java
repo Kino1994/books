@@ -24,7 +24,9 @@ public class BookResponse {
 	
 	public interface BookDetail extends Basico, Info { }
 	
-	public interface BookDetailWithComments extends Basico, Info, Extra { }
+	public interface BookDetailWithComments extends Basico, Info, Extra, CommentResponse.CommentInfoDetail{ }
+	
+	public interface BookDetailWithCommentsFull extends Basico, Info, Extra, CommentResponse.CommentDetail{ }
 
 	@JsonView(Basico.class)
 	@JsonProperty("id")

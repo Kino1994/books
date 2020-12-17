@@ -46,7 +46,7 @@ public interface BookApi {
         produces = { "application/json" }, 
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<BookResponse> add(@JsonView(BookRequest.BookDetail.class) @RequestBody BookRequest bookRequest);
+    ResponseEntity<BookResponse> add(@JsonView(BookRequest.BookDetail.class) @Valid @RequestBody BookRequest bookRequest);
 
     @Operation(description = "Get Book by id")
     @JsonView(BookResponse.BookDetailWithComments.class)

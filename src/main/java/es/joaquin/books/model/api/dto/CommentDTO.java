@@ -18,8 +18,6 @@ public class CommentDTO {
 	
 	private Integer score;
 	
-	private String author;
-	
 	private User User;
 
 }

@@ -1,5 +1,6 @@
 package es.joaquin.books.model.api.request;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,6 +37,7 @@ public class UserRequest {
 	@JsonProperty("nick")
 	private String nick;
 	
+	@Valid	
 	@Email(message="Please provide a valid email address")
 	@JsonView(Extra.class)
 	@JsonProperty("email")

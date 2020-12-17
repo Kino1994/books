@@ -34,7 +34,7 @@ public class Book {
 	
 	private Integer year;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "book")
 	private List<Comment> comments;
 	
 }
