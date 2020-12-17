@@ -1,42 +1,35 @@
 package es.joaquin.books.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicLong;
+import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.joaquin.books.model.Book;
-import es.joaquin.books.model.Comment;
-import es.joaquin.books.model.api.BookPost;
-import es.joaquin.books.model.api.CommentPost;
-import utils.DTOtoBean;
+import es.joaquin.books.entities.Book;
+import es.joaquin.books.repository.BookRepository;
 
 @Service
-public class BookService {
+public class BookService {	
 	
-	private ConcurrentMap<Long, Book> books = new ConcurrentHashMap<>();
-	private AtomicLong nextBookId = new AtomicLong();
-	private AtomicLong nextCommentId = new AtomicLong();
-		
-	public BookService() {
-		this.save(new BookPost("Atlas shrugged", "summary 1", "Ayn Rand", "Deusto", 2019));
-		this.save(new BookPost("Harry Potter y la camara secreta", "summary 2", "J.K Rowling", "Salamandra", 1999));
-		this.save(new BookPost("Contra la Teoría Monetaria Moderna", "summary 3", "Juan Ramon Rallo", "Deusto", 2017));
-		this.save(new BookPost("Estados Fallidos", "summary 4", "Noam Chomsky", "B de Bolsillo", 2017));
-		this.save(new BookPost("Viaje a la libertad economica", "summary 5", "Daniel Lacalle", "Deusto", 2013));
-		this.save(new BookPost("Memoria del comunismo", "summary 6", "Federico Jimenez Los Santos", "Espasa", 2018));
-		this.save(new BookPost("Liberalismo: Los 10 principios basicos del orden liberal", "summary 7", "Juan Ramon Rallo", "Deusto", 2019));
-		this.save(new BookPost("Padre Rico, Padre pobre", "summary 8", "ROber T Kiyoaski", "De Bolsillo", 2020));
-		this.save(new BookPost("Los años de Aznar", "summary 9", "Sergio Gomez Alba", "Cordoba", 2020));
-		this.save(new BookPost("Los ricos de Franco", "summary 10", "Mariano Sanchez Soler", "Roca", 2020));
-		this.save(new BookPost("Blockchain: La revolución industrial de Internet", "summary 11", "Alexander Preukschat", "Ediciones Gestion", 2017));
-		this.put(0L, new CommentPost("Gran libro", "joaquin", 5));
+	@Autowired
+	private BookRepository bookRepository;
+	
+	@PostConstruct
+	public void init () {		
+		bookRepository.save(new Book(null,"Atlas shrugged", "summary 1", "Ayn Rand", "Deusto", 2019,null));
+		bookRepository.save(new Book(null,"Harry Potter y la camara secreta", "summary 2", "J.K Rowling", "Salamandra", 1999,null));
+		bookRepository.save(new Book(null,"Contra la Teoría Monetaria Moderna", "summary 3", "Juan Ramon Rallo", "Deusto", 2017,null));
+		bookRepository.save(new Book(null,"Estados Fallidos", "summary 4", "Noam Chomsky", "B de Bolsillo", 2017,null));
+		bookRepository.save(new Book(null,"Viaje a la libertad economica", "summary 5", "Daniel Lacalle", "Deusto", 2013,null));
+		bookRepository.save(new Book(null,"Memoria del comunismo", "summary 6", "Federico Jimenez Los Santos", "Espasa", 2018,null));
+		bookRepository.save(new Book(null,"Liberalismo: Los 10 principios basicos del orden liberal", "summary 7", "Juan Ramon Rallo", "Deusto", 2019,null));
+		bookRepository.save(new Book(null,"Padre Rico, Padre pobre", "summary 8", "Rober T Kiyoaski", "De Bolsillo", 2020,null));
+		bookRepository.save(new Book(null,"Los años de Aznar", "summary 9", "Sergio Gomez Alba", "Cordoba", 2020,null));
+		bookRepository.save(new Book(null,"Los ricos de Franco", "summary 10", "Mariano Sanchez Soler", "Roca", 2020,null));
+		bookRepository.save(new Book(null,"Blockchain: La revolución industrial de Internet", "summary 11", "Alexander Preukschat", "Ediciones Gestion", 2017,null));
 	}
 
-	public Book save(BookPost bookPost) {
+	/*public Book save(BookPost bookPost) {
 		Book book = DTOtoBean.toBook(bookPost);
 		long id = nextBookId.getAndIncrement();		
 		book.setId(id);
@@ -80,6 +73,7 @@ public class BookService {
 			return comment;			
 		}
 		return null;
-	}
+	}*/
 
 }
+
