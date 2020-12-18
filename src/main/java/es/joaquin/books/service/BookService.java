@@ -1,18 +1,37 @@
 package es.joaquin.books.service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import javax.annotation.PostConstruct;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.joaquin.books.entities.Book;
+import es.joaquin.books.entities.Comment;
+import es.joaquin.books.entities.User;
+import es.joaquin.books.model.api.dto.BookDTO;
+import es.joaquin.books.model.api.dto.CommentDTO;
 import es.joaquin.books.repository.BookRepository;
+import es.joaquin.books.repository.CommentRepository;
+import es.joaquin.books.repository.UserRepository;
 
 @Service
-public class BookService {	
+public class BookService {		
 	
 	@Autowired
 	private BookRepository bookRepository;
+		
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private CommentRepository commentRepository;
+	
+	private static final ModelMapper modelMapper = new ModelMapper();
 	
 	@PostConstruct
 	public void init () {		
@@ -28,52 +47,47 @@ public class BookService {
 		bookRepository.save(new Book(null,"Los ricos de Franco", "summary 10", "Mariano Sanchez Soler", "Roca", 2020,null));
 		bookRepository.save(new Book(null,"Blockchain: La revolución industrial de Internet", "summary 11", "Alexander Preukschat", "Ediciones Gestion", 2017,null));
 	}
-
-	/*public Book save(BookPost bookPost) {
-		Book book = DTOtoBean.toBook(bookPost);
-		long id = nextBookId.getAndIncrement();		
-		book.setId(id);
-		this.books.put(id, book);
-		
-		return book;		
+	
+	public List<BookDTO> findAll(){
+		return bookRepository.findAll().stream().map(book -> modelMapper.map(book,  BookDTO.class)).collect(Collectors.toList());
 	}
 	
-	public Book findById (Long id) {
-		return this.books.get(id);
-	}
-	
-	public List<Book> findAll(){
-		return new ArrayList<Book>(this.books.values());
-	}
-	
-	public Book put(Long idBook, CommentPost commentPost) {
-		Book book = books.get(idBook);
-		if (book!=null) {
-			Comment comment = DTOtoBean.toComment(commentPost);
-			long nextId = nextCommentId.getAndIncrement();
-			comment.setId(nextId);
-			if (book.getComments() == null) {
-				book.setComments(new ArrayList<>());
-			}
-			else {
-				book.getComments().add(comment);
-			}
-			return book;
+	public Optional<BookDTO> findById(Long id){
+		Optional<Book> book = bookRepository.findById(id);
+		if (!book.isEmpty() &&  book.isPresent()) {
+			return Optional.of(modelMapper.map(bookRepository.save(book.get()), BookDTO.class));		
 		}
-		return null;
+		return Optional.empty();
 	}
 	
-	public Comment delete(Long idBook, Long idComment) {
-		Book book = books.get(idBook);
-		if (book!=null) {
-			Comment comment =  book.getComments().stream().filter(c -> c.getId().equals(idComment))
-			  .findAny()
-			  .orElse(null);
-			book.getComments().removeIf(c -> c.getId().equals(idComment));
-			return comment;			
+	public BookDTO save(BookDTO bookDTO) {
+		Book book = modelMapper.map(bookDTO, Book.class);
+		return modelMapper.map(bookRepository.save(book),BookDTO.class); 
+	}
+	
+	public Optional<BookDTO> comment(Long bookId, CommentDTO commentDTO) {
+		Optional<Book> book = bookRepository.findById(bookId);
+		if (!book.isEmpty() && book.isPresent()) {
+			Optional<User> user = userRepository.findByNick(commentDTO.getNick());
+			if (!user.isEmpty() && user.isPresent()) {			
+				Comment comment = modelMapper.map(commentDTO, Comment.class);
+				comment.setUser(user.get());
+				comment.setBook(book.get());
+				commentRepository.save(comment);
+				return Optional.of(modelMapper.map(bookRepository.findById(bookId).get(), BookDTO.class));
+			}
 		}
-		return null;
-	}*/
+		return Optional.empty();
+	}
+	
+	public Boolean delete(Long id) {
+		Optional<Comment> comments = commentRepository.findById(id);
+		if (!comments.isEmpty() && comments.isPresent()) {
+			commentRepository.delete(comments.get());
+			return true;
+		}
+		return false;
+	}
 
 }
 

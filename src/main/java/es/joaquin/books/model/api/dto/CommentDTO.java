@@ -1,6 +1,5 @@
 package es.joaquin.books.model.api.dto;
 
-import es.joaquin.books.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,10 +13,21 @@ public class CommentDTO {
 	
 	private Long id;
 	
-	private String text;
+	private String message;
 	
 	private Integer score;
 	
-	private User User;
+	private String nick;
+	
+	private String email;
+	
+	private Long bookId;
+	
+	private UserDTO user;
+	
+	public CommentDTO setBookId(Long bookId) {
+		this.bookId = bookId;
+		return this;
+	}
 
 }

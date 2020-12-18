@@ -23,12 +23,10 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private String text;
+	private String message;
 	
 	private Integer score;
-	
-	private String author;
-	
+		
 	@ManyToOne
 	private Book book;
 	

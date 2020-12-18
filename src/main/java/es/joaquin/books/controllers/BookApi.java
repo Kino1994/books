@@ -1,5 +1,6 @@
 package es.joaquin.books.controllers;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -46,7 +47,7 @@ public interface BookApi {
         produces = { "application/json" }, 
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<BookResponse> add(@JsonView(BookRequest.BookDetail.class) @Valid @RequestBody BookRequest bookRequest);
+    ResponseEntity<BookResponse> add(@JsonView(BookRequest.BookInfo.class) @Valid @RequestBody BookRequest bookRequest) throws URISyntaxException;
 
     @Operation(description = "Get Book by id")
     @JsonView(BookResponse.BookDetailWithComments.class)
@@ -72,8 +73,8 @@ public interface BookApi {
         produces = { "application/json" }, 
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<BookResponse> put(@Parameter(in = ParameterIn.PATH, description = "", required=true) @PathVariable("id") Long id, 
-    	    @JsonView(CommentRequest.Info.class) @Valid @RequestBody CommentRequest commentRequest);
+    ResponseEntity<BookResponse> comment(@Parameter(in = ParameterIn.PATH, description = "", required=true) @PathVariable("id") Long id, 
+    	    @JsonView(CommentRequest.Info.class) @Valid @RequestBody CommentRequest commentRequest) throws URISyntaxException;
     
    
     @Operation(description = "Delete a Comment from a Book")
@@ -82,9 +83,8 @@ public interface BookApi {
         @ApiResponse(responseCode = "404", description = "The specified resource was not found"),        
         @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    @RequestMapping(value = "/books/{id}/comment/{commentId}",
+    @RequestMapping(value = "/books/comment/{commentId}",
         method = RequestMethod.DELETE)
-    ResponseEntity<Void> delete(@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("id") Long id,
-    							@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("commentId") Long commentId);
+    ResponseEntity<Void> delete(@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("commentId") Long commentId);
 
 }

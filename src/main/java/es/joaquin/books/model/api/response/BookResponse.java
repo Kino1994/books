@@ -45,8 +45,8 @@ public class BookResponse {
 	private String author;
 
 	@JsonView(Info.class)
-	@JsonProperty("editorial")
-	private String editorial;
+	@JsonProperty("publisher")
+	private String publisher;
 
 	@JsonView(Info.class)
 	@JsonProperty("year")
