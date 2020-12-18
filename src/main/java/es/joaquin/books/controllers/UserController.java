@@ -19,7 +19,6 @@ import es.joaquin.books.model.api.dto.UserDTO;
 import es.joaquin.books.model.api.request.UserRequest;
 import es.joaquin.books.model.api.response.CommentResponse;
 import es.joaquin.books.model.api.response.UserResponse;
-import es.joaquin.books.service.CommentService;
 import es.joaquin.books.service.UserService;
 
 @RestController
@@ -28,10 +27,7 @@ public class UserController implements UserApi{
 	
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private CommentService commentService;
-	
+		
 	private static final ModelMapper modelMapper = new ModelMapper();
 
 	@Override
@@ -78,7 +74,7 @@ public class UserController implements UserApi{
 
 	@Override
 	public ResponseEntity<List<CommentResponse>> findCommentsByUserId(Long userId) {
-		return new ResponseEntity<List<CommentResponse>>(commentService.findCommentsByUserId(userId).stream()
+		return new ResponseEntity<List<CommentResponse>>(userService.findCommentsByUserId(userId).stream()
 			.map(comment -> modelMapper.map(comment, CommentResponse.class)).collect(Collectors.toList()),HttpStatus.OK);
 	}
 
