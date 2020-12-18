@@ -73,8 +73,8 @@ public class UserController implements UserApi{
 	}
 
 	@Override
-	public ResponseEntity<List<CommentResponse>> findCommentsByUserId(Long userId) {
-		return new ResponseEntity<List<CommentResponse>>(userService.findCommentsByUserId(userId).stream()
+	public ResponseEntity<List<CommentResponse>> findCommentsByUserId(Long id) {
+		return new ResponseEntity<List<CommentResponse>>(userService.findCommentsByUserId(id).stream()
 			.map(comment -> modelMapper.map(comment, CommentResponse.class)).collect(Collectors.toList()),HttpStatus.OK);
 	}
 

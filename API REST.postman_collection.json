@@ -6,18 +6,20 @@
 	},
 	"item": [
 		{
-			"name": "GET BOOKS 200",
+			"name": "GET BOOKS",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/books",
+					"raw": "http://localhost:8080/api/v1/books",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"api",
+						"v1",
 						"books"
 					]
 				}
@@ -25,53 +27,35 @@
 			"response": []
 		},
 		{
-			"name": "GET BOOK BY ID WITH ONE COMMENT 200",
+			"name": "GET BOOK BY ID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/books/0",
+					"raw": "http://localhost:8080/api/v1/books/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"api",
+						"v1",
 						"books",
-						"0"
+						"1"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "GET BOOK BY ID WITH EMPTY COMMENTS 200",
+			"name": "ADD COMMENT",
 			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/books/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"books",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "PUT COMMENT 200",
-			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"message\": \"Este libro es buenisimo\",\n  \"name\": \"joaquin\",\n  \"score\": 5\n}",
+					"raw": "{\n  \"message\": \"Este libro es buenisimo\",\n  \"nick\": \"joaquin\",\n  \"score\": 5\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -79,15 +63,17 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/books/0/comment",
+					"raw": "http://localhost:8080/api/v1/books/1/comment",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"api",
+						"v1",
 						"books",
-						"0",
+						"1",
 						"comment"
 					]
 				}
@@ -95,13 +81,13 @@
 			"response": []
 		},
 		{
-			"name": "PUT COMMENT IN A NO EXISTING BOOK 404",
+			"name": "ADD COMMENT WITH WRONG SCORE",
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"message\": \"Este libro es buenisimo\",\n  \"name\": \"joaquin\",\n  \"score\": 5\n}",
+					"raw": "{\n  \"message\": \"Este libro es buenisimo\",\n  \"nick\": \"joaquin\",\n  \"score\": 7\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -109,43 +95,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/books/22/comment",
+					"raw": "http://localhost:8080/api/v1/books/2/comment",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"books",
-						"22",
-						"comment"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "PUT COMMENT WITH WRONG SCORE 400",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"message\": \"Este libro es buenisimo\",\n  \"name\": \"joaquin\",\n  \"score\": 7\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/books/2/comment",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
+						"api",
+						"v1",
 						"books",
 						"2",
 						"comment"
@@ -155,13 +113,13 @@
 			"response": []
 		},
 		{
-			"name": "POST BOOK 201",
+			"name": "POST BOOK",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"author\": \"Joaquin\",\n  \"editorial\": \"la editorial de Joaquin\",\n  \"publication_year\": 2020,\n  \"summary\": \"Resumen del libro de Joaquin\",\n  \"tittle\": \"El libro de Joaquin\"\n}",
+					"raw": "{\n  \"author\": \"Joaquin\",\n  \"publisher\": \"la editorial de Joaquin\",\n  \"year\": 2020,\n  \"summary\": \"Resumen del libro de Joaquin\",\n  \"tittle\": \"El libro de Joaquin\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -169,13 +127,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/books",
+					"raw": "http://localhost:8080/api/v1/books",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"api",
+						"v1",
 						"books"
 					]
 				}
@@ -183,22 +143,23 @@
 			"response": []
 		},
 		{
-			"name": "DELETE EXISTING COMMENT 204",
+			"name": "DELETE COMMENT",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/books/0/comment/0",
+					"raw": "http://localhost:8080/api/v1/books/comment/20",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
+						"api",
+						"v1",
 						"books",
-						"0",
 						"comment",
-						"0"
+						"20"
 					]
 				},
 				"description": "DELETE COMMENT"
@@ -206,27 +167,152 @@
 			"response": []
 		},
 		{
-			"name": "DELETE NOT FOUND COMMENT 404",
+			"name": "GET USERS",
 			"request": {
-				"method": "DELETE",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/books/0/comment/5",
+					"raw": "http://localhost:8080/api/v1/users",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"books",
-						"0",
-						"comment",
-						"5"
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET USERS BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET COMMENTS BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/12/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"12",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AÑADIR USUARIO",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"test@hotmail.com\",\n  \"nick\": \"test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACTUALIZAR CORREO",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"prueba@hotmail.com\",\n  \"nick\": \"joaquin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE USER BY ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"12"
 					]
 				}
 			},
 			"response": []
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

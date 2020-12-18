@@ -93,10 +93,10 @@ public interface UserApi {
         @ApiResponse(responseCode = "200", description = "Successful operation"),        
         @ApiResponse(responseCode = "404", description = "The specified User was not found")
     })
-    @RequestMapping(value = "/users/{userId}/comments",
+    @RequestMapping(value = "/users/{id}/comments",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<CommentResponse>> findCommentsByUserId(@Parameter(in = ParameterIn.PATH, description = "", required=true) @PathVariable("userId") Long userId);
+    ResponseEntity<List<CommentResponse>> findCommentsByUserId(@Parameter(in = ParameterIn.PATH, description = "", required=true) @PathVariable("id") Long id);
     
 
 }
