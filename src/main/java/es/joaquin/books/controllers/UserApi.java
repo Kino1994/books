@@ -88,7 +88,7 @@ public interface UserApi {
     ResponseEntity<Void> delete(@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("id") Long id);
     
     @Operation(description = "Get Comments by User id")
-	@JsonView(CommentResponse.CommentInfoDetail.class)
+	@JsonView(CommentResponse.CommentFullDetail.class)
     @ApiResponses(value = { 
         @ApiResponse(responseCode = "200", description = "Successful operation"),        
         @ApiResponse(responseCode = "404", description = "The specified User was not found")

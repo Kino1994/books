@@ -27,7 +27,7 @@ public class CommentResponse {
 	
 	public interface CommentInfoDetail extends Info, Basico, Extra, UserResponse.Info { }
 	
-	public interface CommentFullDetail extends Info, Basico, Extra, BookId { }
+	public interface CommentFullDetail extends Info, Basico, Extra, BookId, UserResponse.Info { }
 
 	@JsonView(Info.class)
 	@JsonProperty("id")
