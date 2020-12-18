@@ -48,7 +48,7 @@ public class UserController implements UserApi{
 	}
 
 	@Override
-	public ResponseEntity<UserResponse> put(@Valid UserRequest userRequest) {
+	public ResponseEntity<UserResponse> patch(@Valid UserRequest userRequest) {
 		UserDTO user = modelMapper.map(userRequest, UserDTO.class);
 		Optional<UserDTO> userOptional = userService.update(user);
 		if (!userOptional.isEmpty() && userOptional.isPresent()) {

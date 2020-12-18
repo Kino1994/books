@@ -61,8 +61,8 @@ public interface UserApi {
     @RequestMapping(value = "/users",
         produces = { "application/json" }, 
         consumes = { "application/json" }, 
-        method = RequestMethod.PUT)
-    ResponseEntity<UserResponse> put(@JsonView(UserRequest.User.class) @Valid @RequestBody UserRequest UserRequest);
+        method = RequestMethod.PATCH)
+    ResponseEntity<UserResponse> patch(@JsonView(UserRequest.User.class) @Valid @RequestBody UserRequest UserRequest);
     
 
     @Operation(description = "Get User by id")

@@ -265,7 +265,7 @@
 		{
 			"name": "ACTUALIZAR CORREO",
 			"request": {
-				"method": "PUT",
+				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "raw",
